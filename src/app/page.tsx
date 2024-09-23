@@ -1,101 +1,147 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
+import TypewriterEffect from "@/app/components/TypewriterEffect";
+import ProjectCard, { Project } from "@/app/components/ProjectCard";
+import SkillList from "@/app/components/SkillList";
+import dalvinImg from "../public/dalvinsegura.webp";
+import packiePreview from "../public/packie-preview.webp";
+import educusPreview from "../public/educus-preview.webp";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const projects = [
+    {
+      title: "Packie",
+      description:
+        "Packie is an app that simplifies delivery management with real-time tracking and easy communication between businesses, couriers, and customers.",
+      image: packiePreview,
+      technologies: ["React Native", "Expo", "Firebase"],
+      link: "/projects/packie-app",
+    },
+    {
+      title: "Educus",
+      description:
+        "The most affordable and effective way to track your study time.",
+      image: educusPreview,
+      technologies: ["Next.js", "Supabase", "Chrome Extension"],
+      link: "/projects/educus",
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const skills = [
+    "React Native",
+    "Expo SDK",
+    "Express.js",
+    "C#",
+    "React.js",
+    "Next.js",
+    "Firebase",
+    "SQL Server",
+    "PostgreSQL",
+    "Git/GitHub",
+    "Tailwind CSS",
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Dalvin Segura</h1>
+          <TypewriterEffect text="Software Developer & Tech Entrepreneur" />
+          <p className="mt-4 text-xl text-gray-300">
+            Turning ideas into reality, one line of code at a time.
+          </p>
+          <Link
+            href="#contact"
+            className="mt-8 inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Get in Touch
+          </Link>
+        </motion.div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="container mx-auto px-4 py-20">
+        <h2 className="text-3xl font-bold mb-10 text-center">
+          Featured Projects
+        </h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project: Project, index: number) => (
+            <ProjectCard key={index} project={project} />
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="bg-gray-800 py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-10 text-center">My Skills</h2>
+          <SkillList skills={skills} />
+        </div>
+      </section>
+
+      {/* About Me Section */}
+      <section id="about" className="container mx-auto px-4 py-20">
+        <div className="flex flex-col md:flex-row items-center">
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <Image
+              src={dalvinImg}
+              alt="Dalvin Segura"
+              width={400}
+              height={400}
+              className="rounded-full"
+            />
+          </div>
+          <div className="md:w-1/2 md:pl-8">
+            <h2 className="text-3xl font-bold mb-4">About Me</h2>
+            <p className="text-gray-300 mb-4">
+              I'm <strong>Dalvin Segura</strong>, a software developer from the
+              Dominican Republic specializing in{" "}
+              <strong>mobile app development</strong> with
+              <strong>React Native</strong> and <strong>Expo.</strong> I’ve
+              built cross-platform apps for iOS and Android, with backend
+              experience using <strong>Express.js, PostgreSQL,</strong> and
+              frontend work with <strong>Next.js.</strong>
+            </p>
+            <p className="text-gray-300">
+              I’m the founder of <strong>Packie,</strong> a shipment tracking
+              platform for small businesses, and developed
+              <strong>Instarecibo,</strong> a receipt management app for
+              property owners. Currently, I'm pursuing the
+              <strong>Google Data Analytics Professional Certificate</strong> to
+              explore <strong>data science</strong> and enhance my skills in
+              data-driven decision-making. I'm passionate about solving problems
+              through technology and continuously learning.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section
+        id="contact"
+        className="container mx-auto px-4 py-20 flex flex-col"
+      >
+        <h2 className="text-3xl font-bold mb-10 text-center">Get in Touch</h2>
+        {/* <ContactForm /> */}
+        {/* 
+        Let's get in touch via email at
+        */}
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:dalvin@seguradev.com"
+          className="w-52 text-center bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6  rounded-full transition duration-300 self-center"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          Email Me
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
     </div>
   );
 }
