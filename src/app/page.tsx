@@ -108,7 +108,7 @@ export default function Home() {
                 Get in Touch
               </Link>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/dalvinsegura"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center"
@@ -116,7 +116,7 @@ export default function Home() {
                 <FaLinkedin className="mr-2" /> LinkedIn
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/dalvinsegura"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center"
