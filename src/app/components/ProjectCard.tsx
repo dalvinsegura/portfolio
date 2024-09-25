@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { SiExpo, SiFirebase, SiNextdotjs, SiSupabase } from "react-icons/si";
 import { TbBrandReactNative, TbBrandChrome } from "react-icons/tb";
@@ -19,7 +19,7 @@ const techIcons: { [key: string]: JSX.Element } = {
 export interface Project {
   title: string;
   description: string;
-  image: string;
+  image: StaticImageData;
   video: string;
   technologies: string[];
   link: string;
