@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import packiePreview from "../../public/packie-preview.webp";
-import educusPreview from "../../public/educus-preview.webp";
+import packiePreview from "../../../public/packie-preview.webp";
+import educusPreview from "../../../public/educus-preview.webp";
 
 // Simulated project data
 const projects = [

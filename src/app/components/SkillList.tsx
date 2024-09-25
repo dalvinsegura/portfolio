@@ -2,23 +2,28 @@
 
 import { motion } from "framer-motion";
 
-export default function SkillList({ skills }: { skills: string[] }) {
+interface Skill {
+  name: string;
+  icon: JSX.Element;
+}
+
+interface SkillListProps {
+  skills: Skill[];
+}
+
+export default function SkillList({ skills }: SkillListProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-wrap justify-center"
-    >
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {skills.map((skill, index) => (
         <motion.div
           key={index}
-          whileHover={{ scale: 1.1 }}
-          className="bg-red-600 text-white rounded-full px-4 py-2 m-2"
+          whileHover={{ scale: 1.05 }}
+          className="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center shadow-lg"
         >
-          {skill}
+          <div className="text-4xl mb-2">{skill.icon}</div>
+          <span className="text-center">{skill.name}</span>
         </motion.div>
       ))}
-    </motion.div>
+    </div>
   );
 }

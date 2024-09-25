@@ -1,97 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const menuItems = [
+    { name: "Projects", href: "/projects" },
+    { name: "Skills", href: "/#skills" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
+  ];
 
   return (
-    <header className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold">
-          DS
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "bg-gray-900/80 backdrop-blur-md" : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link href="/" className="flex items-center space-x-2">
+          <Image
+            src="/dalvinsegura.webp"
+            alt="Dalvin Segura"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <span className="text-xl font-bold text-white">Dalvin Segura</span>
         </Link>
-        <nav className="hidden md:flex space-x-4">
-          <Link
-            href="/projects"
-            className="hover:text-red-500 transition duration-300"
-          >
-            Projects
-          </Link>
-          <Link
-            href="/#skills"
-            className="hover:text-red-500 transition duration-300"
-          >
-            Skills
-          </Link>
-          <Link
-            href="/#about"
-            className="hover:text-red-500 transition duration-300"
-          >
-            About
-          </Link>
-          <Link
-            href="/#contact"
-            className="hover:text-red-500 transition duration-300"
-          >
-            Contact
-          </Link>
+        <nav className="hidden md:flex items-center space-x-6">
+          {menuItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-white hover:text-red-500 transition duration-300"
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+        <button
+          className="md:hidden text-white focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden"
-        >
-          <nav className="flex flex-col items-center py-4">
-            <Link
-              href="/projects"
-              className="py-2 hover:text-red-500 transition duration-300"
-            >
-              Projects
-            </Link>
-            <Link
-              href="/#skills"
-              className="py-2 hover:text-red-500 transition duration-300"
-            >
-              Skills
-            </Link>
-            <Link
-              href="/#about"
-              className="py-2 hover:text-red-500 transition duration-300"
-            >
-              About
-            </Link>
-            <Link
-              href="/#contact"
-              className="py-2 hover:text-red-500 transition duration-300"
-            >
-              Contact
-            </Link>
-          </nav>
-        </motion.div>
-      )}
+      <motion.nav
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        variants={{
+          open: { opacity: 1, height: "auto" },
+          closed: { opacity: 0, height: 0 },
+        }}
+        transition={{ duration: 0.3 }}
+        className="md:hidden overflow-hidden bg-gray-900"
+      >
+        {menuItems.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="block py-2 px-4 text-white hover:bg-gray-800 transition duration-300"
+            onClick={() => setIsOpen(false)}
+          >
+            {item.name}
+          </Link>
+        ))}
+      </motion.nav>
     </header>
   );
 }
