@@ -31,16 +31,16 @@ export default function CertificateCarousel({
 }: CertificateCarouselProps) {
   return (
     <Carousel
-      swipeable={false}
-      draggable={false}
+      swipeable={true}
+      draggable={true}
       showDots={false}
       responsive={responsive}
       ssr={true}
       infinite={true}
       autoPlay={true}
-      autoPlaySpeed={3000}
+      autoPlaySpeed={1500}
       keyBoardControl={false}
-      customTransition="ease-in-out 0.5s"
+      // customTransition="ease-in-out 0.5s"
       transitionDuration={500}
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
